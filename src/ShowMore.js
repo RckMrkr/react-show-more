@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component} from 'react';
+import {PropTypes} from 'prop-types';
 import Truncate from 'react-truncate';
 
 class ShowMore extends Component {
@@ -24,9 +25,7 @@ class ShowMore extends Component {
 
     handleTruncate = truncated => {
         if (truncated !== this.state.truncated) {
-            this.setState({
-                truncated
-            });
+            this.setState({truncated});
         }
     }
 
@@ -39,32 +38,26 @@ class ShowMore extends Component {
     }
 
     render() {
-        const {
-            children,
-            more,
-            less,
-            lines,
-            anchorClass
-        } = this.props;
+        const {children, more, less, lines, anchorClass} = this.props;
 
-        const {
-            expanded,
-            truncated
-        } = this.state;
+        const {expanded, truncated} = this.state;
 
         return (
             <div>
                 <Truncate
                     lines={!expanded && lines}
                     ellipsis={(
-                        <span>... <a href='#' className={anchorClass} onClick={this.toggleLines}>{more}</a></span>
-                    )}
-                    onTruncate={this.handleTruncate}
-                >
+                    <span>...
+                        <a href='#' className={anchorClass} onClick={this.toggleLines}>{more}</a>
+                    </span>
+                )}
+                    onTruncate={this.handleTruncate}>
                     {children}
                 </Truncate>
                 {!truncated && expanded && (
-                    <span> <a href='#' className={anchorClass} onClick={this.toggleLines}>{less}</a></span>
+                    <span>
+                        <a href='#' className={anchorClass} onClick={this.toggleLines}>{less}</a>
+                    </span>
                 )}
             </div>
         );
